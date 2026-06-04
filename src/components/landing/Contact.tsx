@@ -75,8 +75,8 @@ export function Contact() {
           <p className="text-muted-foreground">ご質問・デモのお申込みはこちらから。</p>
           <p className="mt-4 text-sm text-muted-foreground">
             メールでのお問い合わせ：
-            
-              href="mailto:dishboard.info@gmail.com"
+            <a
+            href="mailto:dishboard.info@gmail.com"
               className="text-orange font-semibold hover:underline ml-1"
               onClick={() => sendGAEvent("cta_click", { event_category: "contact", event_label: "mailto_link" })}
             >
