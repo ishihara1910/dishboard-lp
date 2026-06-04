@@ -1,6 +1,12 @@
-﻿import { useState, useRef, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 function sendGAEvent(eventName: string, params: Record<string, string | number>) {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -11,13 +17,33 @@ function sendGAEvent(eventName: string, params: Record<string, string | number>)
 export function Contact() {
   const ref = useReveal<HTMLDivElement>();
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+
     const formData = new FormData(formRef.current!);
     const company = formData.get("company") as string;
+    const store = formData.get("store") as string;
+    const name = formData.get("name") as string;
     const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const message = formData.get("message") as string;
+
+    const { error: supabaseError } = await supabase
+      .from("contacts")
+      .insert([{ company, store, name, email, phone, message }]);
+
+    if (supabaseError) {
+      setError("送信に失敗しました。もう一度お試しください。");
+      setLoading(false);
+      return;
+    }
+
     sendGAEvent("generate_lead", {
       event_category: "contact",
       event_label: "dishboard_contact_form",
@@ -27,7 +53,8 @@ export function Contact() {
       event_label: company || "未入力",
       form_id: "dishboard_contact",
     });
-    console.info("送信:", { company, email });
+
+    setLoading(false);
     setSent(true);
   };
 
@@ -48,7 +75,7 @@ export function Contact() {
           <p className="text-muted-foreground">ご質問・デモのお申込みはこちらから。</p>
           <p className="mt-4 text-sm text-muted-foreground">
             メールでのお問い合わせ：
-            <a
+            
               href="mailto:dishboard.info@gmail.com"
               className="text-orange font-semibold hover:underline ml-1"
               onClick={() => sendGAEvent("cta_click", { event_category: "contact", event_label: "mailto_link" })}
@@ -98,13 +125,17 @@ export function Contact() {
                 className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-orange/40 focus:border-orange transition resize-none"
               />
             </div>
+            {error && (
+              <p className="text-red-500 text-sm">{error}</p>
+            )}
             <button
               type="submit"
+              disabled={loading}
               onClick={() => sendGAEvent("cta_click", { event_category: "engagement", event_label: "contact_submit_button" })}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-orange text-white font-semibold shadow-orange hover:scale-[1.01] transition"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-orange text-white font-semibold shadow-orange hover:scale-[1.01] transition disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
-              送信する
+              {loading ? "送信中..." : "送信する"}
             </button>
           </form>
         )}
