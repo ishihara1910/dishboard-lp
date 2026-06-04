@@ -91,6 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         children: "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KE3MP38W1Y');",
       },
+      {
+        children: `window.__SUPABASE_URL__="${process.env.VITE_SUPABASE_URL}";window.__SUPABASE_ANON_KEY__="${process.env.VITE_SUPABASE_ANON_KEY}";`,
+      },
     ],
   }),
   shellComponent: RootShell,

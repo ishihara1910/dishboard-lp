@@ -3,10 +3,11 @@ import { Send, CheckCircle2 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+function getSupabaseClient() {
+  const url = (window as any).__SUPABASE_URL__ || import.meta.env.VITE_SUPABASE_URL;
+  const key = (window as any).__SUPABASE_ANON_KEY__ || import.meta.env.VITE_SUPABASE_ANON_KEY;
+  return createClient(url, key);
+}
 
 function sendGAEvent(eventName: string, params: Record<string, string | number>) {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -34,6 +35,7 @@ export function Contact() {
     const phone = formData.get("phone") as string;
     const message = formData.get("message") as string;
 
+    const supabase = getSupabaseClient();
     const { error: supabaseError } = await supabase
       .from("contacts")
       .insert([{ company, store, name, email, phone, message }]);
@@ -75,8 +77,8 @@ export function Contact() {
           <p className="text-muted-foreground">ご質問・デモのお申込みはこちらから。</p>
           <p className="mt-4 text-sm text-muted-foreground">
             メールでのお問い合わせ：
-            <a
-            href="mailto:dishboard.info@gmail.com"
+            
+              href="mailto:dishboard.info@gmail.com"
               className="text-orange font-semibold hover:underline ml-1"
               onClick={() => sendGAEvent("cta_click", { event_category: "contact", event_label: "mailto_link" })}
             >
