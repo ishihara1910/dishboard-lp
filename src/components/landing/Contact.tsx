@@ -4,8 +4,12 @@ import { useReveal } from "@/hooks/use-reveal";
 import { createClient } from "@supabase/supabase-js";
 
 function getSupabaseClient() {
-  const url = (window as any).__SUPABASE_URL__ || import.meta.env.VITE_SUPABASE_URL;
-  const key = (window as any).__SUPABASE_ANON_KEY__ || import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const url = (window as any).__SUPABASE_URL__ 
+    || import.meta.env.VITE_SUPABASE_URL 
+    || "https://xvomywhxiiexfnkgipal.supabase.co";
+  const key = (window as any).__SUPABASE_ANON_KEY__ 
+    || import.meta.env.VITE_SUPABASE_ANON_KEY
+    || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2b215d2h4aWlleGZua2dpcGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMDg2MDcsImV4cCI6MjA5MjU4NDYwN30.HIuNey2zt-M1LDsFPT-4H18IOWEhq2jjfVFzIEKUdOM";
   return createClient(url, key);
 }
 
