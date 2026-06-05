@@ -3,15 +3,11 @@ import { Send, CheckCircle2 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import { createClient } from "@supabase/supabase-js";
 
-function getSupabaseClient() {
-  const url = (window as any).__SUPABASE_URL__ 
-    || import.meta.env.VITE_SUPABASE_URL 
-    || "https://xvomywhxiiexfnkgipal.supabase.co";
-  const key = (window as any).__SUPABASE_ANON_KEY__ 
-    || import.meta.env.VITE_SUPABASE_ANON_KEY
-    || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2b215d2h4aWlleGZua2dpcGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMDg2MDcsImV4cCI6MjA5MjU4NDYwN30.HIuNey2zt-M1LDsFPT-4H18IOWEhq2jjfVFzIEKUdOM";
-  return createClient(url, key);
-}
+// モジュールトップレベルで初期化（SSR対応）
+const supabase = createClient(
+  "https://xvomywhxiiexfnkgipal.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2b215d2h4aWlleGZua2dpcGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMDg2MDcsImV4cCI6MjA5MjU4NDYwN30.HIuNey2zt-M1LDsFPT-4H18IOWEhq2jjfVFzIEKUdOM"
+);
 
 function sendGAEvent(eventName: string, params: Record<string, string | number>) {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -39,7 +35,6 @@ export function Contact() {
     const phone = formData.get("phone") as string;
     const message = formData.get("message") as string;
 
-    const supabase = getSupabaseClient();
     const { error: supabaseError } = await supabase
       .from("contacts")
       .insert([{ company, store, name, email, phone, message }]);
@@ -81,7 +76,7 @@ export function Contact() {
           <p className="text-muted-foreground">ご質問・デモのお申込みはこちらから。</p>
           <p className="mt-4 text-sm text-muted-foreground">
             メールでのお問い合わせ：
-            <a
+            
               href="mailto:dishboard.info@gmail.com"
               className="text-orange font-semibold hover:underline ml-1"
               onClick={() => sendGAEvent("cta_click", { event_category: "contact", event_label: "mailto_link" })}
