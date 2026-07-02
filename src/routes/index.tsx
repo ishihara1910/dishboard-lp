@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { Problems } from "@/components/landing/Problems";
+import { DataIntegration } from "@/components/landing/DataIntegration";
 import { Features } from "@/components/landing/Features";
-import { Benefits } from "@/components/landing/Benefits";
+import { BeforeAfter } from "@/components/landing/BeforeAfter";
 import { Steps } from "@/components/landing/Steps";
 import { Faq } from "@/components/landing/Faq";
 import { Contact } from "@/components/landing/Contact";
@@ -13,10 +14,10 @@ import { useAnalytics } from "@/hooks/use-analytics";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DishBoard｜飲食店の経営を、データで変える" },
-      { name: "description", content: "売上・経費・シフトをひとつの画面で。飲食店向け経営ダッシュボード DishBoard。複数店舗運営にも対応。" },
-      { property: "og:title", content: "DishBoard｜飲食店の経営を、データで変える" },
-      { property: "og:description", content: "売上・経費・シフトをひとつの画面で。店舗運営をもっとシンプルに。" },
+      { title: "DishBoard｜飲食店の経営データを、ひとつに。" },
+      { name: "description", content: "シフト・売上・経費の3データを統合。FL比率の自動計算から税理士書類の一括出力まで。飲食店向け経営管理プラットフォーム DishBoard。" },
+      { property: "og:title", content: "DishBoard｜飲食店の経営データを、ひとつに。" },
+      { property: "og:description", content: "シフト・売上・経費の3データを統合。FL比率の自動計算から税理士書類の一括出力まで。" },
       { property: "og:type", content: "website" },
     ],
     links: [
@@ -37,8 +38,9 @@ function Index() {
       <Navbar />
       <Hero />
       <Problems />
+      <DataIntegration />
       <Features />
-      <Benefits />
+      <BeforeAfter />
       <Steps />
       <Faq />
       <Contact />

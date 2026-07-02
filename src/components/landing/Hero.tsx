@@ -1,4 +1,10 @@
-import { ArrowRight, BarChart3, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
+
+const stores = [
+  { name: "渋谷店", fl: 55, color: "bg-green-500", badge: "良好", badgeCls: "bg-green-100 text-green-700" },
+  { name: "新宿店", fl: 68, color: "bg-yellow-400", badge: "要確認", badgeCls: "bg-yellow-100 text-yellow-700" },
+  { name: "池袋店", fl: 80, color: "bg-red-400", badge: "要改善", badgeCls: "bg-red-100 text-red-700" },
+];
 
 export function Hero() {
   return (
@@ -10,15 +16,14 @@ export function Hero() {
         <div>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-medium mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-orange" />
-            飲食店向け経営ダッシュボード
+            飲食店向け 経営管理プラットフォーム
           </span>
           <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6">
-            飲食店の経営を、<br />
-            <span className="bg-gradient-orange bg-clip-text text-transparent">データで変える。</span>
+            シフト・売上・経費が、<br />
+            <span className="bg-gradient-orange bg-clip-text text-transparent">ひとつに繋がる。</span>
           </h1>
           <p className="text-lg text-white/75 mb-10 leading-relaxed max-w-xl">
-            売上・経費・シフトをひとつの画面で。<br />
-            店舗運営をもっとシンプルに。
+            バラバラに管理していたデータを統合することで、FL比率が自動計算され、月次書類が一発で出力される。経営判断が、今日から変わる。
           </p>
           <div className="flex flex-wrap gap-4">
             <a
@@ -40,30 +45,46 @@ export function Hero() {
         <div className="relative">
           <div className="absolute -inset-4 bg-gradient-orange opacity-20 blur-3xl rounded-full" />
           <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-card">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <p className="text-xs text-white/60">本日の売上</p>
-                <p className="text-3xl font-bold">¥482,300</p>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-5">
+              <p className="font-bold text-base">企業ダッシュボード</p>
+              <span className="px-2.5 py-1 rounded-md bg-white/10 text-white/80 text-xs font-medium">2026年 7月</span>
+            </div>
+
+            {/* Metric cards */}
+            <div className="grid grid-cols-3 gap-3 mb-5">
+              <div className="bg-orange/80 rounded-xl p-3 col-span-1">
+                <p className="text-[10px] text-white/70 mb-1">売上（全店舗）</p>
+                <p className="text-lg font-bold leading-tight">¥28.4百万</p>
+                <p className="text-[10px] text-white/80 mt-1 flex items-center gap-0.5">
+                  <TrendingUp className="w-3 h-3" /> 前月比 +6.2%
+                </p>
               </div>
-              <span className="px-2.5 py-1 rounded-md bg-orange/20 text-orange-soft text-xs font-semibold flex items-center gap-1">
-                <TrendingUp className="w-3 h-3" /> +12.4%
-              </span>
+              <div className="bg-orange/80 rounded-xl p-3 col-span-1">
+                <p className="text-[10px] text-white/70 mb-1">経費（全店舗）</p>
+                <p className="text-lg font-bold leading-tight">¥17.4百万</p>
+                <p className="text-[10px] text-white/80 mt-1 flex items-center gap-0.5">
+                  <TrendingUp className="w-3 h-3" /> 前月比 +3.4%
+                </p>
+              </div>
+              <div className="bg-white/10 rounded-xl p-3 col-span-1 relative overflow-hidden">
+                <p className="text-[10px] text-white/70 mb-1">利益</p>
+                <p className="text-lg font-bold leading-tight" style={{ filter: "blur(3px)", opacity: 0.4 }}>¥11.0百万</p>
+                <p className="text-[10px] text-orange-soft mt-1">🔒 月末確定後</p>
+              </div>
             </div>
-            <div className="h-32 flex items-end gap-2 mb-6">
-              {[40, 65, 50, 80, 55, 90, 70, 95, 75, 88, 60, 100].map((h, i) => (
-                <div key={i} className="flex-1 rounded-t-md bg-gradient-to-t from-orange/30 to-orange" style={{ height: `${h}%` }} />
-              ))}
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { icon: BarChart3, label: "客数", value: "182" },
-                { icon: Users, label: "稼働", value: "8名" },
-                { icon: TrendingUp, label: "客単価", value: "¥2,650" },
-              ].map((s) => (
-                <div key={s.label} className="bg-white/5 rounded-lg p-3 border border-white/5">
-                  <s.icon className="w-4 h-4 text-orange-soft mb-1" />
-                  <p className="text-[10px] text-white/60">{s.label}</p>
-                  <p className="text-sm font-semibold">{s.value}</p>
+
+            {/* Store FL table */}
+            <div className="space-y-2">
+              <p className="text-[10px] text-white/50 mb-2 uppercase tracking-wider">店舗別 FL比率</p>
+              {stores.map((s) => (
+                <div key={s.name} className="flex items-center gap-3 bg-white/5 rounded-lg px-3 py-2">
+                  <span className="text-xs text-white/80 w-14 shrink-0">{s.name}</span>
+                  <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className={`h-full ${s.color} rounded-full`} style={{ width: `${s.fl}%` }} />
+                  </div>
+                  <span className="text-xs font-semibold w-8 text-right">{s.fl}%</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${s.badgeCls}`}>{s.badge}</span>
                 </div>
               ))}
             </div>
