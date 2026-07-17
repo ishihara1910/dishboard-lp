@@ -3,10 +3,7 @@ export function Footer() {
     <footer className="bg-gradient-orange text-white/90 py-12">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2 font-display font-bold text-lg text-white">
-          <span className="w-8 h-8 rounded-lg bg-white/20 grid place-items-center">
-            <img src="/header-icon.png" alt="DishBoard" className="w-full h-full object-contain" />
-          </span>
-          DishBoard
+          <img src="/header-icon.png" alt="DishBoard" className="h-10 w-auto object-contain brightness-0 invert" />
         </div>
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-sm">
           <a href="mailto:dishboard.info@gmail.com" className="hover:text-white transition">dishboard.info@gmail.com</a>
