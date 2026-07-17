@@ -16,7 +16,7 @@ export function Navbar() {
         </nav>
         <a
           href="#contact"
-          className="inline-flex items-center px-4 py-2 rounded-lg bg-navy text-white text-sm font-semibold hover:bg-navy-deep transition"
+          className="inline-flex items-center px-4 py-2 rounded-lg bg-gradient-orange text-white text-sm font-semibold hover:opacity-90 transition shadow-orange"
         >
           無料デモ
         </a>

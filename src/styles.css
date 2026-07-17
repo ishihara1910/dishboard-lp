@@ -65,7 +65,7 @@
   --orange: oklch(0.72 0.19 50);
   --orange-soft: oklch(0.82 0.13 60);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.15 0.05 258) 0%, oklch(0.22 0.06 255) 60%, oklch(0.3 0.08 270) 100%);
+  --gradient-hero: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.98 0.01 60) 100%);
   --gradient-orange: linear-gradient(135deg, oklch(0.72 0.19 50), oklch(0.78 0.16 60));
   --shadow-soft: 0 4px 24px -8px oklch(0.22 0.05 255 / 0.12);
   --shadow-card: 0 10px 40px -12px oklch(0.22 0.05 255 / 0.18);
