@@ -3,7 +3,7 @@ export function Navbar() {
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/75 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2 font-display font-bold text-lg text-navy">
-          <img src="/header-icon.png" alt="DishBoard" className="h-10 w-auto object-contain" />
+          <img src="/header-icon.png" alt="DishBoard" className="h-9 w-auto object-contain" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#features" className="hover:text-navy transition">機能</a>
