@@ -1,12 +1,10 @@
-import { UtensilsCrossed } from "lucide-react";
-
 export function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/75 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2 font-display font-bold text-lg text-navy">
-          <span className="w-8 h-8 rounded-lg bg-gradient-orange grid place-items-center text-white">
-            <UtensilsCrossed className="w-4 h-4" />
+          <span className="w-8 h-8 rounded-lg bg-gradient-orange grid place-items-center">
+            <img src="/header-icon.png" alt="DishBoard" className="w-full h-full object-contain" />
           </span>
           DishBoard
         </a>
