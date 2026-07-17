@@ -3,7 +3,7 @@ import { Send, CheckCircle2 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import { createClient } from "@supabase/supabase-js";
 
-// 繝｢繧ｸ繝･繝ｼ繝ｫ繝医ャ繝励Ξ繝吶Ν縺ｧ蛻晄悄蛹厄ｼ・SR蟇ｾ蠢懶ｼ・const supabase = createClient(
+const supabase = createClient(
   "https://xvomywhxiiexfnkgipal.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2b215d2h4aWlleGZua2dpcGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMDg2MDcsImV4cCI6MjA5MjU4NDYwN30.HIuNey2zt-M1LDsFPT-4H18IOWEhq2jjfVFzIEKUdOM"
 );
@@ -39,7 +39,7 @@ export function Contact() {
       .insert([{ company, store, name, email, phone, message }]);
 
     if (supabaseError) {
-      setError("騾∽ｿ｡縺ｫ螟ｱ謨励＠縺ｾ縺励◆縲ゅｂ縺・ｸ蠎ｦ縺願ｩｦ縺励￥縺縺輔＞縲・);
+      setError("送信に失敗しました。もう一度お試しください。");
       setLoading(false);
       return;
     }
@@ -50,7 +50,7 @@ export function Contact() {
     });
     sendGAEvent("form_submit", {
       event_category: "contact",
-      event_label: company || "譛ｪ蜈･蜉・,
+      event_label: company || "未入力",
       form_id: "dishboard_contact",
     });
 
@@ -59,11 +59,11 @@ export function Contact() {
   };
 
   const fields = [
-    { name: "company", label: "莨夂､ｾ蜷・, type: "text", required: true },
-    { name: "store", label: "蠎苓・蜷・, type: "text", required: true },
-    { name: "name", label: "諡・ｽ楢・錐", type: "text", required: true },
-    { name: "email", label: "繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ", type: "email", required: true },
-    { name: "phone", label: "髮ｻ隧ｱ逡ｪ蜿ｷ", type: "tel", required: false },
+    { name: "company", label: "会社名", type: "text", required: true },
+    { name: "store", label: "店舗名", type: "text", required: true },
+    { name: "name", label: "担当者名", type: "text", required: true },
+    { name: "email", label: "メールアドレス", type: "email", required: true },
+    { name: "phone", label: "電話番号", type: "tel", required: false },
   ];
 
   return (
@@ -71,10 +71,11 @@ export function Contact() {
       <div ref={ref} className="fade-in-up max-w-3xl mx-auto px-6">
         <div className="text-center mb-12">
           <p className="text-orange font-semibold text-sm tracking-widest mb-3">CONTACT</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">縺雁撫縺・粋繧上○</h2>
-          <p className="text-muted-foreground">縺碑ｳｪ蝠上・繝・Δ縺ｮ縺顔筏霎ｼ縺ｿ縺ｯ縺薙■繧峨°繧峨・/p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">お問い合わせ</h2>
+          <p className="text-muted-foreground">ご質問・デモのお申込みはこちらから。</p>
           <p className="mt-4 text-sm text-muted-foreground">
-            繝｡繝ｼ繝ｫ縺ｧ縺ｮ縺雁撫縺・粋繧上○・・            <a
+            メールでのお問い合わせ：
+            <a
               href="mailto:dishboard.info@gmail.com"
               className="text-orange font-semibold hover:underline ml-1"
               onClick={() => sendGAEvent("cta_click", { event_category: "contact", event_label: "mailto_link" })}
@@ -86,8 +87,8 @@ export function Contact() {
         {sent ? (
           <div className="p-10 rounded-2xl bg-card border border-border shadow-card text-center">
             <CheckCircle2 className="w-14 h-14 text-orange mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-foreground mb-2">騾∽ｿ｡縺悟ｮ御ｺ・＠縺ｾ縺励◆</h3>
-            <p className="text-muted-foreground">諡・ｽ楢・ｈ繧願ｿｽ縺｣縺ｦ縺秘｣邨｡縺・◆縺励∪縺吶・/p>
+            <h3 className="text-xl font-bold text-foreground mb-2">送信が完了しました</h3>
+            <p className="text-muted-foreground">担当者より追ってご連絡いたします。</p>
           </div>
         ) : (
           <form
@@ -114,7 +115,7 @@ export function Contact() {
             </div>
             <div>
               <label className="block text-sm font-semibold text-foreground mb-2">
-                縺雁撫縺・粋繧上○蜀・ｮｹ<span className="text-orange ml-1">*</span>
+                お問い合わせ内容<span className="text-orange ml-1">*</span>
               </label>
               <textarea
                 name="message"
@@ -134,7 +135,7 @@ export function Contact() {
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-orange text-white font-semibold shadow-orange hover:scale-[1.01] transition disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
-              {loading ? "騾∽ｿ｡荳ｭ..." : "騾∽ｿ｡縺吶ｋ"}
+              {loading ? "送信中..." : "送信する"}
             </button>
           </form>
         )}
