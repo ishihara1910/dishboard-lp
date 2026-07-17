@@ -6,7 +6,7 @@
     },
     "routes": [
       { "src": "/assets/(.*)", "dest": "/dist/client/assets/$1" },
-      { "src": "/favicon.png", "dest": "/public/favicon.png" },
+      { "src": "/favicon.png", "dest": "/dist/client/favicon.png" },
       { "src": "/(.*)", "dest": "/api/index.ts" }
     ]
   }
