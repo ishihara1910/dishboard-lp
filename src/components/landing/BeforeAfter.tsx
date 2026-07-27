@@ -16,7 +16,7 @@ export function BeforeAfter() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-white">
             <p className="font-semibold text-sm tracking-widest mb-3 text-white/70 uppercase">Before / After</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">DishBoard導入で、何が変わるか。</h2>
+            <h2 className="text-3xl font-bold mb-6 whitespace-nowrap">DishBoard導入で、何が変わるか。</h2>
             <p className="text-white/80 leading-relaxed text-lg">
               データが繋がると、作業時間が減るだけでなく、経営判断のタイミングが変わる。
             </p>
