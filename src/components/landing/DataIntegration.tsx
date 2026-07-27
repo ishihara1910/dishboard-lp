@@ -30,9 +30,10 @@ function FlowCanvas() {
 
     const cx = W / 2;
     const cy = H / 2;
-    const srcX = 80;
-    const dstX = W - 80;
-    const ys = [cy - 60, cy, cy + 60];
+    const srcX = W * 0.13;
+    const dstX = W * 0.87;
+    const spread = H * 0.28;
+    const ys = [cy - spread, cy, cy + spread];
 
     // particles: 6 paths (3 src->center, 3 center->dst)
     const paths = [
@@ -63,10 +64,13 @@ function FlowCanvas() {
       });
       ctx.setLineDash([]);
 
+      const r = Math.max(22, Math.min(32, W * 0.07));
+      const rCenter = r * 1.28;
+
       // draw source nodes
       SOURCES.forEach((s, i) => {
         ctx.beginPath();
-        ctx.arc(srcX, ys[i], 28, 0, Math.PI * 2);
+        ctx.arc(srcX, ys[i], r, 0, Math.PI * 2);
         ctx.fillStyle = s.color + "22";
         ctx.fill();
         ctx.strokeStyle = s.color;
@@ -82,7 +86,7 @@ function FlowCanvas() {
 
       // center node
       ctx.beginPath();
-      ctx.arc(cx, cy, 36, 0, Math.PI * 2);
+      ctx.arc(cx, cy, rCenter, 0, Math.PI * 2);
       ctx.fillStyle = "#f9731620";
       ctx.fill();
       ctx.strokeStyle = "#f97316";
@@ -98,7 +102,7 @@ function FlowCanvas() {
       // output nodes
       OUTPUTS.forEach((o, i) => {
         ctx.beginPath();
-        ctx.arc(dstX, ys[i], 28, 0, Math.PI * 2);
+        ctx.arc(dstX, ys[i], r, 0, Math.PI * 2);
         ctx.fillStyle = "#f9731615";
         ctx.fill();
         ctx.strokeStyle = "#f9731660";
@@ -130,7 +134,7 @@ function FlowCanvas() {
     return () => cancelAnimationFrame(animRef.current);
   }, []);
 
-  return <canvas ref={ref} className="w-full h-52" />;
+  return <canvas ref={ref} className="w-full h-64 md:h-52" />;
 }
 
 const cards = [
