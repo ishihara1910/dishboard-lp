@@ -82,7 +82,7 @@ export function Features() {
               key={f.title}
               className="relative group p-8 rounded-2xl bg-card border border-border shadow-soft hover:shadow-card hover:-translate-y-1 transition"
             >
-              <div className="absolute top-6 right-6 text-5xl font-display font-bold text-muted/50">{f.num}</div>
+              <div className="absolute top-6 right-6 text-5xl font-display font-bold text-foreground/10">{f.num}</div>
               <h3 className="text-lg font-bold text-foreground mb-2">{f.title}</h3>
               <div className="flex flex-wrap gap-1 mb-3">
                 {f.tags.map((t) => <Tag key={t} label={t} />)}
