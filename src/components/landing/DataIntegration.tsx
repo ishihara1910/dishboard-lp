@@ -154,7 +154,7 @@ const cards = [
 export function DataIntegration() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="py-28 bg-gradient-hero text-white">
+    <section className="py-28 text-white" style={{ background: "linear-gradient(135deg, #1e2a4a 0%, #0f172a 100%)" }}>
       <div ref={ref} className="fade-in-up max-w-6xl mx-auto px-6">
         <div className="text-center mb-14">
           <p className="text-orange-soft font-semibold text-sm tracking-widest mb-3">Data Integration</p>
