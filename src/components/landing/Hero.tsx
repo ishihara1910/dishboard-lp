@@ -8,18 +8,19 @@ const stores = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative bg-white overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
+    <section id="top" className="relative bg-white overflow-hidden pt-28 pb-16 md:pt-40 md:pb-32">
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: "radial-gradient(circle at 20% 30%, oklch(0.72 0.19 50 / 0.3), transparent 40%), radial-gradient(circle at 80% 70%, oklch(0.82 0.13 60 / 0.2), transparent 45%)"
       }} />
-      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange/10 border border-orange/20 text-xs font-medium mb-6 text-orange">
             <span className="w-1.5 h-1.5 rounded-full bg-orange" />
             飲食店向け 経営管理プラットフォーム
           </span>
           <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 text-foreground">
-            シフト・売上・経費が、<br />
+            シフト・売上・経費が、
+            <br />
             <span className="bg-gradient-orange bg-clip-text text-transparent">ひとつに繋がる。</span>
           </h1>
           <p className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-xl">
