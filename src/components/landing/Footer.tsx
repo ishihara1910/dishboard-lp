@@ -7,7 +7,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-sm">
           <a href="mailto:dishboard.info@gmail.com" className="hover:text-white transition">dishboard.info@gmail.com</a>
-          <a href="#" className="hover:text-white transition">プライバシーポリシー</a>
+          <a href="https://restro-radar-plus.vercel.app/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">プライバシーポリシー</a>
           <span className="text-white/70">© 2026 DishBoard</span>
         </div>
       </div>
